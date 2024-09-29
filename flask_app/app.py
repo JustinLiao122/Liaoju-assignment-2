@@ -209,11 +209,12 @@ index = 0
 
 @app.route('/')
 def index():
-    global k_value , data_points , manual_centroids , index
+    global k_value , data_points , manual_centroids , index , method
     k_value = -1
     manual_centroids = []
     data_points = generate_random_points(200)
     index = 0
+    method = 'Random'
     start_graph(data_points)
     return render_template('index.html')
 
