@@ -8,7 +8,7 @@ from matplotlib.animation import FuncAnimation
 import imageio
 
 class KMeans():
-
+    
 
 
     def __init__(self, data, k , method ,manuel):
@@ -65,21 +65,24 @@ class KMeans():
         
 
     def assign_clusters(self):
-        self.clusters = {i: [] for i in range(self.k)}  
-        for node in self.data:
-            index = self.closest_to(node)  
-            self.clusters[index].append(node)  
 
-    def closest_to(self, node):
-            distances = [np.linalg.norm(node - centroid) for centroid in self.centroids]
-            min_distance = np.min(distances)
+        distances = np.linalg.norm(self.data[:, np.newaxis] - self.centroids, axis=2)
+        closest_centroids = np.argmin(distances, axis=1)
+        self.clusters = {i: [] for i in range(self.k)}
+
+        for i, index in enumerate(closest_centroids):
+            self.clusters[index].append(self.data[i])
+
+#    def closest_to(self, node):
+ #           distances = [np.linalg.norm(node - centroid) for centroid in self.centroids]
+  #          min_distance = np.min(distances)
     
-            closest_indices = [i for i, dist in enumerate(distances) if dist == min_distance]
+   #         closest_indices = [i for i, dist in enumerate(distances) if dist == min_distance]
     
-            if len(closest_indices) > 1: 
-                return min(closest_indices, key=lambda i: len(self.clusters[i]))
+    #        if len(closest_indices) > 1: 
+     #           return min(closest_indices, key=lambda i: len(self.clusters[i]))
     
-            return np.argmin(distances) 
+      #      return np.argmin(distances) 
 
 
     def new_centroids(self):
@@ -87,19 +90,18 @@ class KMeans():
         new_centroids = []
         for cluster in self.clusters.values():
             new_centroids.append(np.mean(cluster, axis=0))
-        else:
-             print(f"Cluster {cluster} has no points, reinitializing centroid.")
         self.centroids = np.array(new_centroids)
 
 
 
 
     def fit(self):
-        
+        max_iterations = 100
         self.which_method()
         old_centroids = self.centroids.copy()
         plt.ion()
-        while(1):
+        
+        while(0 < max_iterations):
             self.assign_clusters()
             self.history.append((self.centroids.copy(), {i: cluster[:] for i, cluster in self.clusters.items()}))
             self.new_centroids()
@@ -107,7 +109,8 @@ class KMeans():
                 self.history.append((self.centroids.copy(), {i: cluster[:] for i, cluster in self.clusters.items()}))  # Capture final state
                 break
             old_centroids = self.centroids.copy()
-            plt.pause(0.5)      
+            plt.pause(0.5)   
+            max_iterations = max_iterations -1   
         plt.ioff()
         return True
 
@@ -206,7 +209,7 @@ index = 0
 
 @app.route('/')
 def index():
-    global k_value , data_points , manual_centroids
+    global k_value , data_points , manual_centroids , index
     k_value = -1
     manual_centroids = []
     data_points = generate_random_points(200)
@@ -288,8 +291,6 @@ def add_centroid():
     data = request.get_json()
     x, y = data['x'], data['y']
     manual_centroids.append([x, y])
-    
-    print(manual_centroids)
     return jsonify(success=True)
 
 @app.route('/get_k_value', methods=['GET'])
