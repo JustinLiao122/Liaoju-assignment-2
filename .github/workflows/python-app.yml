@@ -41,5 +41,5 @@ jobs:
       run: |
         make install
         make run &
-        sleep 5  # Give the server some time to start
-        # You can add commands here to run tests or checks against your running application
+        sleep 5 
+        curl --fail http://localhost:3000 || exit 1
