@@ -43,7 +43,7 @@ class KMeans():
 
 
     def kmeans_plus_plus(self):
-        self.centroids = [self.data[random.randint(0, len(self.data)-1)]]
+        self.centroids = [self  .data[random.randint(0, len(self.data)-1)]]
         for _ in range(1, self.k):
             distances = np.array([min([np.linalg.norm(x - c)**2 for c in self.centroids]) for x in self.data])
             probabilities = distances / distances.sum()

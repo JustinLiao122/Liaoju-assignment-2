@@ -1,0 +1,228 @@
+
+:root {
+    --ff-primary: 'Source Sans Pro', sans-serif;
+    --ff-secondary: 'Source Code Pro', monospace;
+    
+    --fw-reg: 300;
+    --fw-bold: 900;
+    
+    --clr-light: #095117;
+    --clr-dark: #303030;
+    --clr-accent: #00fbff;
+    --clr-accent2: #ffffff;
+    --clr-background:  #160e0e;
+    
+    --fs-h1: 6rem;
+    --fs-h2: 2.25rem;
+    --fs-h3: 1.25rem;
+    --fs-body: 1rem;
+
+    --glow-color: hsl(186 100% 69%);
+    
+    --bs: 0.4em 0.4em 0.8em rgba(255, 104, 3, 0.575),
+          0.2em 0.2em 0.4em rgba(253, 114, 0, 0.837);
+}
+
+
+
+@import url("https://fonts.googleapis.com/css?family=Raleway");
+
+
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+
+
+.Kmeans {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--clr-background);
+  color: var(--clr-accent2);
+  display: flex;
+  flex-direction: column; /* Add this */
+  align-items: center; /* Add this */
+   /* Add this */
+}
+
+.section__title--Kmeans {
+  text-align: center;
+}
+
+.section__title--Numbers {
+  margin-top: 20px; /* Add some space between titles */
+  text-align: center;
+}
+
+
+.input-number {
+  margin-top: 10px; /* Add space above the input */
+  padding: 7px; /* Add some padding */
+  border: 1px solid var(--clr-accent); /* Add a border */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #ffffff; /* White background */
+  color: var(--clr-dark); /* Text color */
+  font-size: 0.75rem; /* Font size */
+  width: 200px; /* Set width */
+  text-align: center; /* Center text in the input */
+}
+
+.section__title--Method {
+  margin-top: 60px; /* Add some space between titles */
+  text-align: center;
+}
+
+
+.dropdown-container {
+  margin-top: 10px;
+  
+}
+
+.dropdown {
+  padding: 7px;
+  border: 1px solid var(--clr-accent);
+  border-radius: 5px;
+  background-color: #ffffff; /* White background */
+  color: var(--clr-dark); /* Text color */
+  font-size: 0.75rem;
+  width: 200px; /* Font size */
+}
+
+.selected-method {
+  margin-top: 20px; /* Space between dropdown and displayed number */
+  font-size: 1.5rem;
+  color: var(--clr-accent2); /* Color of the displayed text */
+}
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+.button-container {
+  display: flex;           /* Aligns buttons in a row */
+  justify-content: space-around; /* Optional: Space them evenly */
+  margin-top: 20px;      /* Space from the top */
+}
+
+.glowing-btn {
+
+  margin: 0 15px;
+
+  color: var(--glow-color);
+  cursor: pointer;
+  padding: 0.35em 1em;
+  border: 0.15em solid var(--glow-color);
+  border-radius: 0.45em;
+  background: none;
+  perspective: 2em;
+  font-family: --ff-primary;
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+
+  -webkit-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
+    0px 0px 0.5em 0px var(--glow-color);
+  -moz-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
+    0px 0px 0.5em 0px var(--glow-color);
+  box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
+    0px 0px 0.5em 0px var(--glow-color);
+  animation: border-flicker 2s linear infinite;
+}
+
+.glowing-txt {
+  float: left;
+  margin-right: -0.8em;
+  -webkit-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
+    0 0 0.45em var(--glow-color);
+  -moz-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
+    0 0 0.45em var(--glow-color);
+  text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--glow-color);
+  animation: text-flicker 3s linear infinite;
+}
+
+.faulty-letter {
+  opacity: 0.5;
+  animation: faulty-flicker 2s linear infinite;
+}
+
+.glowing-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.7;
+  filter: blur(1em);
+  transform: translateY(120%) rotateX(95deg) scale(1, 0.35);
+  background: var(--glow-color);
+  pointer-events: none;
+}
+
+.glowing-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  z-index: -1;
+  background-color: var(--glow-color);
+  box-shadow: 0 0 2em 0.2em var(--glow-color);
+  transition: opacity 100ms linear;
+}
+
+.glowing-btn:hover {
+  color: rgba(0, 0, 0, 0.8);
+  text-shadow: none;
+  animation: none;
+}
+
+.glowing-btn:hover .glowing-txt {
+  animation: none;
+}
+
+.glowing-btn:hover .faulty-letter {
+  animation: none;
+  text-shadow: none;
+  opacity: 1;
+}
+
+.glowing-btn:hover:before {
+  filter: blur(1.5em);
+  opacity: 1;
+}
+
+.glowing-btn:hover:after {
+  opacity: 1;
+}
+
+
+
+.animation-container {
+  margin-top: 50px;
+  padding-top: 20px; 
+  text-align: center; 
+}
+
+.animation_img {
+  width: 500px; 
+  height: auto;
+  display: block; 
+  margin: 0 auto; 
+}
+
+
+
+.red-x {
+  position: absolute;
+  
+  color: red;
+  font-size: 24px;
+  font-weight: bold;
+}

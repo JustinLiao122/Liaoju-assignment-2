@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kmeans
+    </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+        integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
+
+   
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,900|Source+Sans+Pro:300,900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../static/style.css">
+
+</head>
+
+<body>
+    <section class="Kmeans">
+        <h1 class="section__title section__title--Kmeans">
+            <strong>Kmeans Clustering Algorithm</strong>
+        </h1>
+        <h2 class="section__title section__title--Number">
+            <strong>Select Number of Clusters(k):</strong>
+        </h2>
+        <input type="number" class="input-number" placeholder="Enter a number" id="kValueInput" />
+        <h2 class="section__title section__title--Method">
+            <strong>Select Initilization Method:</strong>
+        </h2>
+        <div class="dropdown-container">
+            <select id="methodSelect" class="dropdown" onchange="displaySelected()">
+                <option value="Random">Random</option>
+                <option value="Farthest First">Farthest First</option>
+                <option value="KMeans++">KMeans++</option>
+                <option value="Manual">Manual</option>
+            </select>
+        </div>
+
+        <div class="button-container">
+            <button class='glowing-btn' onclick = "stepThrough()">
+                <span class='glowing-txt'>Step <span class='faulty-letter'>Through </span>Kmeans</span>
+            </button>
+            <button class='glowing-btn' onclick="runToConvergence()">
+                <span class='glowing-txt'>Run <span class='faulty-letter'>To </span>Convergence<span>
+            </button>
+            <button class='glowing-btn' onclick ="generateNewData()">
+                <span class='glowing-txt'>Generate <span class='faulty-letter'>New </span>Dataset<span>
+            </button>
+            <button class='glowing-btn' onclick ="resetAlgorithm()">
+                <span class='glowing-txt'>Reset <span class='faulty-letter'>Alg</span>orithm<span>
+            </button>
+        </div>
+
+    
+        <div class="animation-container">
+                <img id="kmeans-animation" src="{{ url_for('static', filename='kmeans_animation.gif') }}" class  = "animation_img" alt="KMeans Animation" />
+                <div class="centroid-overlay"></div>
+        </div>
+        
+
+
+    </section>
+    <script src="../static/script.js"></script>
+   
+
+</body>
+
+</html>
