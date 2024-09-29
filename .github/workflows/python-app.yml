@@ -39,6 +39,7 @@ jobs:
      #   pytest
     - name: Install and Run
       run: |
+        cd flask_app
         make install
         make run &
         sleep 5 
